@@ -1,0 +1,56 @@
+package com.solo.practice.posting.dto;
+
+import com.solo.practice.member.dto.MemberDto;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+import java.time.LocalDateTime;
+
+public class PostingDto {
+
+    @Getter
+    @Setter
+    public static class Post{
+        @NotBlank
+        private String title;
+        private String content;
+        @Positive
+        private long memberId;
+    }
+
+    @Getter
+    @Setter
+    public static class Patch{
+        private long postingId;
+        private String title;
+        private String content;
+    }
+
+    @Getter
+    @Setter
+    @Builder
+    public static class Response{
+        private long postingId;
+        private String title;
+        private String content;
+        private int viewCount;
+        private LocalDateTime createdAt;
+        private LocalDateTime modifiedAt;
+        private MemberDto.MemberResponse memberResponse;
+    }
+
+    @Getter
+    @Setter
+    @Builder
+    public static class PostingInfoResponse{
+        private long postingId;
+        private String title;
+        private int viewCount;
+        private LocalDateTime createdAt;
+        private LocalDateTime modifiedAt;
+        private MemberDto.MemberResponse memberResponse;
+    }
+}
