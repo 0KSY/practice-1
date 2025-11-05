@@ -1,5 +1,6 @@
 package com.solo.practice.posting.dto;
 
+import com.solo.practice.comment.dto.CommentDto;
 import com.solo.practice.member.dto.MemberDto;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class PostingDto {
 
@@ -40,6 +42,7 @@ public class PostingDto {
         private LocalDateTime createdAt;
         private LocalDateTime modifiedAt;
         private MemberDto.MemberResponse memberResponse;
+        private List<CommentDto.ParentCommentResponse> parentCommentResponses;
     }
 
     @Getter
@@ -49,6 +52,7 @@ public class PostingDto {
         private long postingId;
         private String title;
         private int viewCount;
+        private int commentCount;
         private LocalDateTime createdAt;
         private LocalDateTime modifiedAt;
         private MemberDto.MemberResponse memberResponse;
