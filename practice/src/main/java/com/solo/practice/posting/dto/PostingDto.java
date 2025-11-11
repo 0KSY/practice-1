@@ -22,8 +22,6 @@ public class PostingDto {
         @NotBlank
         private String title;
         private String content;
-        @Positive
-        private long memberId;
 
         @Valid
         private List<PostingTagDto> postingTagDtos;
