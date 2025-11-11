@@ -10,6 +10,7 @@ import com.solo.practice.auth.jwt.JwtTokenizer;
 import com.solo.practice.auth.utils.CustomAuthorityUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -54,7 +55,16 @@ public class SecurityConfiguration {
                 .apply(new CustomFilterConfigurer())
                 .and()
                 .authorizeHttpRequests(authorize -> authorize
-                        .anyRequest().permitAll()
+                        .antMatchers("/h2/**").permitAll()
+                        .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                        .antMatchers(HttpMethod.POST, "/members").permitAll()
+                        .antMatchers("/members/**").hasRole("USER")
+                        .antMatchers(HttpMethod.GET, "/postings/**").permitAll()
+                        .antMatchers("/postings/**").hasRole("USER")
+                        .antMatchers("/comments/**").hasRole("USER")
+                        .antMatchers("/tags").permitAll()
+                        .antMatchers("/postingLikes").hasRole("USER")
+                        .anyRequest().authenticated()
                 );
 
         return http.build();
